@@ -1,0 +1,10 @@
+# Dependency folders
+/node_modules
+/android/
+/ios/
+
+# Expo / build files
+.expo/
+*.jks
+*.p12
+*.key
