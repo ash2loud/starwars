@@ -1,10 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import SearchBar from '../components/SearchBar';
 
 export default function Planets() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Planets</Text>
+      <SearchBar />
+      <View style={styles.content}>
+        <Text style={styles.title}>Planets</Text>
+      </View>
     </View>
   );
 }
@@ -12,9 +16,12 @@ export default function Planets() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#0d0d1a',
+  },
+  content: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#0d0d1a',
   },
   title: {
     fontSize: 36,
