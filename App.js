@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -7,6 +7,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import PlanetsScreen from './screens/Planets';
 import FilmsScreen from './screens/Films';
 import SpaceshipsScreen from './screens/Spaceships';
+import NoConnectionToast from './components/NoConnectionToast';
+import useNetworkStatus from './hooks/useNetworkStatus';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -48,9 +50,20 @@ function AndroidNavigator() {
 }
 
 export default function App() {
+  const isConnected = useNetworkStatus();
+
   return (
-    <NavigationContainer>
-      {Platform.OS === 'ios' ? <IOSNavigator /> : <AndroidNavigator />}
-    </NavigationContainer>
+    <View style={styles.root}>
+      <NavigationContainer>
+        {Platform.OS === 'ios' ? <IOSNavigator /> : <AndroidNavigator />}
+      </NavigationContainer>
+      <NoConnectionToast visible={!isConnected} />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});
